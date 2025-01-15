@@ -1,20 +1,18 @@
-
-import csv
 import json
 
-def task() -> None:
 
-    with open('input.csv', 'r') as f:
-        dict_reader = csv.DictReader(f)
-        headers = dict_reader.fieldnames
-        list = []
-        for line in dict_reader:
-            data = {}
-            for h in headers:
-                data[h] = line[h]
-            list.append(data)
-        s = json.dumps(list, indent=4, sort_keys=False)
-        print(s)
+def task() -> float:
+    with open('input.json', 'r') as file:
+        items = json.load(file)
 
-if __name__ == '__main__':
-    task()
+    total_sum = 0.0
+
+    for item in items:
+        if 'score' in item and 'weight' in item:
+            product = item['score'] * item['weight']
+            total_sum += product
+
+    return round(total_sum, 3)
+
+
+print(task())
