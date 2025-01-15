@@ -1,14 +1,18 @@
-# TODO решите задачу
 import json
 
+
 def task() -> float:
+    with open('input.json', 'r') as file:
+        items = json.load(file)
 
-    with open('input.json', 'r') as fcc_file:
-        fcc_data = json.load(fcc_file)
-        a=0
-        for x in fcc_data:
-            a=a + x["score"] * x["weight"]
+    total_sum = 0.0
 
-        return(round(a, 3))
+    for item in items:
+        if 'score' in item and 'weight' in item:
+            product = item['score'] * item['weight']
+            total_sum += product
+
+    return round(total_sum, 3)
+
 
 print(task())
